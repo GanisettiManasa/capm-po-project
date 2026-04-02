@@ -1,0 +1,65 @@
+---
+spring:
+  config:
+    activate:
+      on-profile: default
+
+cds:
+  security:
+    authentication:
+      mode: never
+
+  data-source:
+    auto-config:
+      enabled: false
+
+  remote.services:
+    API_PURCHASEORDER_PROCESS_SRV:
+      type: odata-v2
+      destination:
+        name: S4H
+---
+
+
+# spring:
+#   config:
+#     activate:
+#       on-profile: default
+#   sql:
+#     init:
+#       platform: h2
+# sap:
+#   cloud:
+#     destination:
+#       destinations[0]:
+#         password: Prem@123
+#         name: S4H
+#         url: http://202.153.35.211:50000
+#         username: PERLA
+# cds:
+#   security:
+#     authentication:
+#       mode: never
+#   data-source:
+#     auto-config:
+#       enabled: false
+#   remote:
+#     services:
+#       '[API_PURCHASEORDER_PROCESS_SRV]':
+#         destination:
+#           name: API_PURCHASEORDER_PROCESS_SRV
+#         type: odata-v2
+---
+# management:
+#   endpoint:
+#     health:
+#       show-components: always
+#       probes.enabled: true
+#   endpoints:
+#     web:
+#       exposure:
+#         include: health
+#   health:
+#     defaults.enabled: false
+#     ping.enabled: true
+#     db.enabled: true
