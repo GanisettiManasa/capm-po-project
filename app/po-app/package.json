@@ -1,0 +1,13 @@
+{
+  "name": "poapp",
+  "version": "1.0.0",
+  "scripts": {
+  "deploy-config": "npx -p @sap/ux-ui5-tooling fiori add deploy-config cf",
+  "build": "ui5 build --clean-dest --dest dist",
+  "start": "npx serve -s webapp"
+},
+"dependencies": {
+  "serve": "^14.0.0"
+}
+
+}

@@ -1,0 +1,1 @@
+{"version":3,"file":"models.js","names":["sap","ui","define","JSONModel","createDummyModel","POData"],"sources":["models-dbg.js"],"mappings":"AAAAA,IAAIC,GAAGC,OAAO,CACZ,+BACC,SAASC,GACV,aACA,MAAO,CACLC,iBAAkB,WAChB,OAAO,IAAID,EAAU,CACnBE,OAAQ,IAEZ,EAEJ","ignoreList":[]}

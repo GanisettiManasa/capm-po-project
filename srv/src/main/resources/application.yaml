@@ -17,7 +17,7 @@ cds:
     API_PURCHASEORDER_PROCESS_SRV:
       type: odata-v2
       destination:
-        name: S4H
+        name: S4H       
 ---
 
 

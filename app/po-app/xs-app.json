@@ -1,0 +1,13 @@
+
+{
+  "welcomeFile": "/index.html",
+  "routes": [
+    {
+      "source": "^/odata/(.*)$",
+      "target": "/odata/$1",
+      "destination": "srv-api",
+      "authenticationType": "none",
+      "csrfProtection": false
+    }
+  ]
+}

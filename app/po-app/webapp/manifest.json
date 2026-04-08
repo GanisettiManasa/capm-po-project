@@ -1,0 +1,111 @@
+{
+  "_version": "1.83.0",
+  "sap.app": {
+    "id": "poapp",
+    "type": "application",
+    "i18n": "i18n/i18n.properties",
+    "applicationVersion": {
+      "version": "0.0.1"
+    },
+    "title": "PO Freestyle App",
+    "description": "Purchase Order App using CAP",
+    "dataSources": {
+      "mainService": {
+        "uri": "/odata/v4/POService/",
+        "type": "OData",
+        "settings": {
+          "odataVersion": "4.01"
+        }
+      }
+    }
+  },
+
+  "sap.ui": {
+    "technology": "UI5",
+    "deviceTypes": {
+      "desktop": true,
+      "tablet": true,
+      "phone": true
+    }
+  },
+
+  "sap.ui5": {
+    "flexEnabled": true,
+
+    "dependencies": {
+      "minUI5Version": "1.146.0",
+      "libs": {
+        "sap.m": {},
+        "sap.ui.core": {}
+      }
+    },
+
+    "contentDensities": {
+      "compact": true,
+      "cozy": true
+    },
+
+    "models": {
+      "i18n": {
+        "type": "sap.ui.model.resource.ResourceModel",
+        "settings": {
+          "bundleName": "poapp.i18n.i18n"
+        }
+      },
+
+      "": {
+        "dataSource": "mainService",
+        "preload": true,
+        "settings": {
+          "operationMode": "Server",
+          "autoExpandSelect": true,
+          "earlyRequests": true,
+          "synchronizationMode": "None"
+        }
+      }
+    },
+
+    "resources": {
+      "css": [
+        {
+          "uri": "css/style.css"
+        }
+      ]
+    },
+
+    "routing": {
+      "config": {
+        "routerClass": "sap.m.routing.Router",
+        "controlAggregation": "pages",
+        "controlId": "app",
+        "transition": "slide",
+        "type": "View",
+        "viewType": "XML",
+        "path": "poapp.view",
+        "async": true
+      },
+
+      "routes": [
+        {
+          "name": "RouteMain",
+          "pattern": "",
+          "target": "TargetMain"
+        }
+      ],
+
+      "targets": {
+        "TargetMain": {
+          "viewName": "View1",
+          "viewType": "XML"
+        }
+      }
+    },
+
+    "rootView": {
+      "viewName": "poapp.view.App",
+      "type": "XML",
+      "id": "app",
+      "async": true
+    }
+  }
+}
