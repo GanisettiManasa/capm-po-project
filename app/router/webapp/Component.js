@@ -1,7 +1,7 @@
 sap.ui.define([
     "sap/ui/core/UIComponent",
     "poapp/model/models"
-], (UIComponent, models) => {
+], function (UIComponent, models) {
     "use strict";
 
     return UIComponent.extend("poapp.Component", {
@@ -12,14 +12,13 @@ sap.ui.define([
             ]
         },
 
-        init() {
-            // call the base component's init function
+        init: function () {
             UIComponent.prototype.init.apply(this, arguments);
 
-            // set the device model
+            console.log("models:", models); // 👈 debug
+
             this.setModel(models.createDeviceModel(), "device");
 
-            // enable routing
             this.getRouter().initialize();
         }
     });

@@ -4,57 +4,70 @@ version: 1.0.0
 
 modules:
 
-# ======================
-# 1. BACKEND (CAP JAVA)
-# ======================
-- name: cap-s4-onprem-srv
-  type: java
-  path: srv
-  requires:
-    - name: destination
-    - name: xsuaa
-    - name: connectivity
-  provides:
-    - name: srv-api
-      properties:
-        url: ${default-url}
-  parameters:
-    memory: 1G
-  build-parameters:
-    build-result: target/*.jar
-    builder: custom
-    commands:
-      - mvn clean package
+  # ======================
+  # 1. BACKEND (CAP JAVA)
+  # ======================
+  - name: cap-s4-onprem-srv
+    type: java
+    path: srv
+    requires:
+      - name: destination
+      - name: xsuaa
+      - name: connectivity
+    provides:
+      - name: srv-api
+        properties:
+          url: ${default-url}
+    parameters:
+      memory: 1G
+    build-parameters:
+      build-result: target/*.jar
+      builder: custom
+      commands:
+        - mvn clean package
+
+  # ======================
+  # 2. APP ROUTER
+  # ======================
+  - name: cap-s4-onprem-approuter
+    type: approuter.nodejs
+    path: app/router
+    requires:
+      - name: srv-api
+      - name: destination
+      - name: xsuaa
+    parameters:
+      memory: 256M
+    properties:
+      destinations: >
+        [
+          {
+            "name": "srv-api",
+            "url": "~{srv-api/url}",
+            "forwardAuthToken": true
+          }
+        ]
 
 # ======================
-# 2. UI (NOW AS APP ✅)
-# ======================
-- name: poapp
-  type: nodejs
-  path: app/po-app
-  parameters:
-    memory: 256M
-
-# ======================
-# RESOURCES
+# RESOURCES (VERY IMPORTANT POSITION)
 # ======================
 resources:
 
-- name: destination
-  type: org.cloudfoundry.managed-service
-  parameters:
-    service: destination
-    service-plan: lite
+  - name: destination
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: destination
+      service-plan: lite
 
-- name: connectivity
-  type: org.cloudfoundry.managed-service
-  parameters:
-    service: connectivity
-    service-plan: lite
+  - name: connectivity
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: connectivity
+      service-plan: lite
 
-- name: xsuaa
-  type: org.cloudfoundry.managed-service
-  parameters:
-    path: ./xs-security.json
-    service: xsuaa
-    service-plan: application
+  - name: xsuaa
+    type: org.cloudfoundry.managed-service
+    parameters:
+      path: ./xs-security.json
+      service: xsuaa
+      service-plan: application

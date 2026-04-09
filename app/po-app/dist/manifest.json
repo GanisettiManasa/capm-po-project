@@ -12,35 +12,20 @@
 		"applicationVersion": {
 			"version": "0.0.1"
 		},
-		"title": "{{appTitle}}",
-		"description": "{{appDescription}}",
-		"resources": "resources.json",
-		"sourceTemplate": {
-			"id": "@sap/generator-fiori:basic",
-			"version": "1.22.0",
-			"toolsId": "8b968e56-0f87-4695-8ab0-7307227095d5"
-		},
+		"title": "PO Freestyle App",
+		"description": "Purchase Order App using CAP",
 		"dataSources": {
 			"mainService": {
 				"uri": "/odata/v4/POService/",
 				"type": "OData",
 				"settings": {
-					"annotations": [],
-					"odataVersion": "4.01"
+					"odataVersion": "4.0"
 				}
 			}
 		}
 	},
 	"sap.ui": {
 		"technology": "UI5",
-		"icons": {
-			"icon": "",
-			"favIcon": "",
-			"phone": "",
-			"phone@2": "",
-			"tablet": "",
-			"tablet@2": ""
-		},
 		"deviceTypes": {
 			"desktop": true,
 			"tablet": true,
@@ -76,7 +61,8 @@
 				"settings": {
 					"operationMode": "Server",
 					"autoExpandSelect": true,
-					"earlyRequests": true
+					"earlyRequests": true,
+					"synchronizationMode": "None"
 				}
 			}
 		},
@@ -96,29 +82,26 @@
 				"type": "View",
 				"viewType": "XML",
 				"path": "poapp.view",
-				"async": true,
-				"viewPath": "poapp.view"
+				"async": true
 			},
 			"routes": [
 				{
-					"name": "RouteView1",
-					"pattern": ":?query:",
-					"target": [
-						"TargetView1"
-					]
+					"name": "RouteMain",
+					"pattern": "",
+					"target": "TargetMain"
 				}
 			],
 			"targets": {
-				"TargetView1": {
-					"id": "View1",
-					"name": "View1"
+				"TargetMain": {
+					"viewName": "View1",
+					"viewType": "XML"
 				}
 			}
 		},
 		"rootView": {
 			"viewName": "poapp.view.App",
 			"type": "XML",
-			"id": "App",
+			"id": "app",
 			"async": true
 		},
 		"flexBundle": false
