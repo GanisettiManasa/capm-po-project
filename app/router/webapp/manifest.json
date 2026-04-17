@@ -81,17 +81,25 @@
           "name": "RouteMain",
           "pattern": "",
           "target": "TargetMain"
+        },
+        {
+          "name": "RouteItems",
+          "pattern": "items/{po}",
+          "target": "TargetItems"
         }
       ],
       "targets": {
         "TargetMain": {
           "viewName": "View1",
           "viewType": "XML"
+        },
+        "TargetItems": {
+          "viewName": "Items"
         }
       }
     },
     "rootView": {
-      "viewName": "poapp.view.App",
+      "viewName": "poapp.view.View1",
       "type": "XML",
       "id": "app",
       "async": true

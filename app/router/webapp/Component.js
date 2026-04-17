@@ -1,6 +1,6 @@
 sap.ui.define([
     "sap/ui/core/UIComponent",
-    "poapp/model/models"
+    "./model/models"
 ], function (UIComponent, models) {
     "use strict";
 

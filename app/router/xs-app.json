@@ -5,6 +5,7 @@
       "source": "^/odata/(.*)$",
       "target": "/odata/$1",
       "destination": "srv-api",
+      "csrfProtection": false,
       "authenticationType": "none"
     },
     {

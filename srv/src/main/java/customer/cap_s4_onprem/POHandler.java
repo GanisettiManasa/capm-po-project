@@ -5,24 +5,11 @@ import com.sap.cds.services.handler.annotations.On;
 import com.sap.cds.services.handler.EventHandler;
 import com.sap.cds.Result;
 import com.sap.cds.ql.cqn.CqnSelect;
-import com.sap.cds.reflect.CdsService;
 import com.sap.cds.services.cds.CdsReadEventContext;
 import com.sap.cds.services.cds.RemoteService;
-import com.sap.cloud.sdk.cloudplatform.connectivity.DestinationAccessor;
-import com.sap.cloud.sdk.cloudplatform.connectivity.HttpDestination;
-import com.sap.cloud.sdk.cloudplatform.connectivity.HttpClientAccessor;
-
-import org.apache.http.client.HttpClient;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.util.EntityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
-
-import java.util.*;
-
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 
 @Component
@@ -33,13 +20,20 @@ public class POHandler implements EventHandler {
     @Qualifier("API_PURCHASEORDER_PROCESS_SRV")
     RemoteService remote;
 
-     @On(event = "READ", entity = "POService.PO")
+     @On(event = "READ", entity = "POService.POItem")
     public void onRead(CdsReadEventContext context) {
 
         CqnSelect query = context.getCqn();
 
         Result result = remote.run(query);
 
+        context.setResult(result);
+    }
+
+    @On(event = "READ", entity = "POService.POHeader")
+    public void onReadItems(CdsReadEventContext context) {
+        CqnSelect query = context.getCqn();
+        Result result = remote.run(query);
         context.setResult(result);
     }
 }
